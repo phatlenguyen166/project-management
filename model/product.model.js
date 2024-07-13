@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
     title: String,
@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     price: Number,
     discountPercentage: Number,
     stock: Number,
-    thumbnail: Number,
+    thumbnail: String,
     status: String,
     position: Number,
     deleted: Boolean
