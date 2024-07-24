@@ -1,5 +1,5 @@
 const express = require('express');
-
+var methodOverride = require('method-override')
 const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
 
@@ -8,6 +8,7 @@ const systemConfig = require("./config/system");
 require("dotenv").config();
 
 const app = express();
+app.use(methodOverride('_method'))
 
 const database = require("./config/database");
 

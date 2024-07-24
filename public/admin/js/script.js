@@ -38,7 +38,7 @@ if (formSearch) {
 
 // Pagination
 const buttonsPagination = document.querySelectorAll("[button-pagination]");
-console.log(buttonsPagination);
+// console.log(buttonsPagination);
 
 if (buttonsPagination) {
     let url = new URL(window.location.href);
@@ -55,3 +55,4 @@ if (buttonsPagination) {
     });
 }
 // End Pagination
+
