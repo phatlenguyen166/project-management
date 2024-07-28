@@ -2,13 +2,14 @@ const express = require('express');
 var methodOverride = require('method-override')
 const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
-
+const bodyParser = require('body-parser');
 const systemConfig = require("./config/system");
 
 require("dotenv").config();
 
 const app = express();
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const database = require("./config/database");
 
