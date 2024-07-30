@@ -46,6 +46,7 @@ module.exports.index = async (req, res) => {
 
 }
 
+
 // [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
@@ -75,6 +76,8 @@ module.exports.changeMulti = async (req, res) => {
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
-    await Product.deleteOne({ _id: id });
+
+    await Product.updateOne({ _id: id }, { deleted: true, deleteAt: new Date() });
+
     res.redirect("back");
 }

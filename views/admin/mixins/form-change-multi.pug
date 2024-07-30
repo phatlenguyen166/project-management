@@ -1,19 +1,19 @@
-mixin form-chang-multi(path)
+mixin form-change-multi(path)
     form(
-        action = path
-        method="POST"
+        action=path
+        method="post"
         form-change-multi
-        ) 
-        .d-flex.align-items-start 
-            .form-group
-            select(name="type" class="form-control")
-                option(value="active") Hoạt động
-                option(value="inactive") Dừng hoạt động
-            .form-group
-            input(
-                type="text"
-                name="ids"
-                value=""
-                class="form-control d-none"
-                )
-            button(type="submit" class="btn btn-primary") Áp dụng
+    ) 
+        .d-flex.align-items-start
+            .form-group.ms-1
+                select(name="type" class="form-control")
+                    option(value="active") Hoạt động
+                    option(value="inactive") Dừng hoạt động
+            .form-group.ms-1
+                input(
+                    type="text"
+                    name="ids"
+                    value=""
+                    class="form-control d-none"   
+            )
+            button(type="submit" class="btn btn-primary ms-1") Áp dụng
