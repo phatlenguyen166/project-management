@@ -29,7 +29,7 @@ if (buttonDelete.length > 0) {
     buttonDelete.forEach(button => {
         button.addEventListener("click", () => {
             const isConfirm = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
-            
+
             if (isConfirm) {
                 const id = button.getAttribute("data-id");
                 const action = `${path}/${id}?_method=DELETE`;
@@ -41,3 +41,25 @@ if (buttonDelete.length > 0) {
 }
 
 // End Delete Item
+
+
+// Restore Product
+const buttonRestore = document.querySelectorAll("[button-restore]");
+
+if (buttonRestore.length > 0) {
+    const formRestoreItem = document.querySelector("#form-restore-item");
+    const path = formRestoreItem.getAttribute("data-path");
+    buttonRestore.forEach(button => {
+        button.addEventListener("click", () => {
+            const isConfirm = confirm("Bạn có chắc chắn muốn khôi phục sản phẩm này?");
+            if (isConfirm) {
+                const id = button.getAttribute("data-id");
+                const action = `${path}/${id}?_method=PATCH`;
+                formRestoreItem.action = action;
+                // console.log(formRestoreItem);
+                formRestoreItem.submit();
+            }
+
+        })
+    });
+}// End Restore Product

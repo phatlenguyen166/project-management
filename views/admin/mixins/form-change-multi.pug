@@ -3,17 +3,22 @@ mixin form-change-multi(path)
         action=path
         method="post"
         form-change-multi
-    ) 
-        .d-flex.align-items-start
-            .form-group.ms-1
-                select(name="type" class="form-control")
-                    option(value="active") Hoạt động
-                    option(value="inactive") Dừng hoạt động
-            .form-group.ms-1
-                input(
-                    type="text"
-                    name="ids"
-                    value=""
-                    class="form-control d-none"   
-            )
-            button(type="submit" class="btn btn-primary ms-1") Áp dụng
+    )   
+        .float-left
+            .d-flex.align-items-start.justify-content-end
+                .form-group.ms-1
+                    select(name="type" class="form-control")
+                        option(disable selected) -- Chọn hàng động --
+                        option(value="active") Hoạt động
+                        option(value="inactive") Dừng hoạt động
+                        option(value="delete-all") Xóa tất cả 
+                .form-group.ms-1
+                    input(
+                        type="text"
+                        name="ids"
+                        value=""
+                        class="form-control d-none"   
+                )
+                button(type="submit" class="btn btn-primary ms-1") Áp dụng
+        .float-right
+            a(href="/admin/products/deleted" class="btn btn-secondary") Thùng rác 

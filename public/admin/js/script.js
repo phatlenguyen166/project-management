@@ -93,6 +93,13 @@ if (formChangeMulti) {
         e.preventDefault();
         const checkboxMulti = document.querySelector("[checkbox-multi]");
         const inputsdChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
+
+        const typeChange = e.target.elements.type.value;
+        console.log(typeChange);
+
+
+
+
         if (inputsdChecked.length > 0) {
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
