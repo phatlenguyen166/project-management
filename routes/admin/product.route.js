@@ -16,4 +16,6 @@ router.get('/deleted', controller.deleted);
 
 router.patch("/deleted/restore/:id", controller.restoreItem);
 
+router.patch("/deleted/restore-multi", controller.restoreManyProducts);
+
 module.exports = router;

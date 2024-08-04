@@ -16,7 +16,7 @@ block main
     .card-header Bộ lọc và tìm kiếm
     .card-body    
       form(
-        action=`${prefixAdmin}/products/deleted/restore?_method=PATCH`
+        action=`${prefixAdmin}/products/deleted/restore-multi?_method=PATCH`
         method="post"
         form-restore
       )   
@@ -24,7 +24,7 @@ block main
       
       table(
         class="table table-hover table-sm"
-        checkbox-multi
+        checkbox-multi-resstore
         )
         thead 
           tr 
@@ -42,7 +42,7 @@ block main
               td 
                 input(
                   type="checkbox" 
-                  name="id"
+                  name="id-restore"
                   value=item.id
                 )
               td #{i+1}
