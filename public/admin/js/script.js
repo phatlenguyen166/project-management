@@ -97,7 +97,12 @@ if (formChangeMulti) {
         const typeChange = e.target.elements.type.value;
         console.log(typeChange);
 
-
+        if (typeChange == "delete-all") {
+            const isConfirm = confirm("Bạn có chắc chắn xóa những sản phẩm này?");
+            if (!isConfirm) {
+                return;
+            }
+        }
 
 
         if (inputsdChecked.length > 0) {
@@ -117,3 +122,25 @@ if (formChangeMulti) {
     });
 }
 // End Form Change Multi
+
+// Restore Many Products
+const formRestoreItems = document.querySelector('[form-restore]');
+if (formRestoreItems) {
+    formRestoreItems.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const checkBoxRestore = document.querySelectorAll("[checkbox-multi-resstore]");
+        const inputsdChecked = checkboxMulti.querySelectorAll("input[name='id-restore']:checked");
+        if (inputsdChecked.length > 0) {
+            let ids = [];
+            const inputIds = formRestoreItems.querySelector("input[name='ids-restore']");
+            inputsdChecked.forEach(input => {
+                const id = input.value;
+                ids.push(id);   
+            });
+            formRestoreItems.submit();
+        } else {
+            alert("Vui lòng chọn ít nhất một sản phẩm!");
+        }
+    })
+}
+// End Restore Many Products

@@ -99,6 +99,33 @@ module.exports.restoreItem = async (req, res) => {
     res.redirect("back");
 };
 
+module.exports.restoreManyProducts = async (req, res) => {
+    const type = req.body.type;
+    const ids = req.body.ids.split(", ");
+    
+    switch (type) {
+        case "active":
+            await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+            break;
+        case "inactive":
+            await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+            break;
+        case "delete-all":
+            await Product.updateMany(
+                {
+                    _id: { $in: ids }
+                },
+                {
+                    deleted: true,
+                    deleteAt: new Date()
+                });
+            break;
+        default:
+            break;
+    }
+    res.redirect("back");
+}
+
 // [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
@@ -112,6 +139,7 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
+    console.log(ids);
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
