@@ -131,7 +131,7 @@ module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
     const status = req.params.status;
 
-    await Product.updateOne({ _id: id, }, { status: status })
+    await Product.updateOne({ _id: id, }, { status:  status })
     res.redirect("back");
 }
 
@@ -139,7 +139,6 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
-    console.log(ids);
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
