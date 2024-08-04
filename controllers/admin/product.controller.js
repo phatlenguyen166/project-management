@@ -35,7 +35,7 @@ module.exports.index = async (req, res) => {
 
 
 
-    const products = await Product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
+    const products = await Product.find(find).sort({ position: "desc" }).limit(objectPagination.limitItem).skip(objectPagination.skip);
 
     res.render("admin/pages/products/index", {
         pageTitle: "Danh sách sản phẩm",
@@ -79,7 +79,10 @@ module.exports.deleted = async (req, res) => {
 
 
 
-    const products = await Product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
+    const products = await Product.find(find)
+        
+        .limit(objectPagination.limitItem)
+        .skip(objectPagination.skip);
 
     res.render("admin/pages/products/productsDeleted", {
         pageTitle: "Danh sách sản phẩm",
@@ -102,7 +105,7 @@ module.exports.restoreItem = async (req, res) => {
 module.exports.restoreManyProducts = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
-    
+
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
@@ -131,7 +134,7 @@ module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
     const status = req.params.status;
 
-    await Product.updateOne({ _id: id, }, { status:  status })
+    await Product.updateOne({ _id: id, }, { status: status })
     res.redirect("back");
 }
 
@@ -139,8 +142,7 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
-    console.log(ids);
-    
+
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
@@ -157,6 +159,13 @@ module.exports.changeMulti = async (req, res) => {
                     deleted: true,
                     deleteAt: new Date()
                 });
+            break;
+        case "change-position":
+            for (const item of ids) {
+                let [id, position] = item.split("-");
+                position = parseInt(position);
+                await Product.updateOne({ _id: id }, { position: position });
+            }
             break;
         default:
             break;

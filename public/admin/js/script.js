@@ -110,7 +110,13 @@ if (formChangeMulti) {
 
             inputsdChecked.forEach(input => {
                 const id = input.value;
-                ids.push(id);
+                if (typeChange == "change-position") {
+                    const position = input.closest("tr").querySelector("input[name='position']").value;
+                    ids.push(`${id}-${position}`);
+                } else {
+                    ids.push(id);
+                }
+
             });
 
             inputIds.value = ids.join(", ");
@@ -134,7 +140,7 @@ if (formRestoreItems) {
             const inputIds = formRestoreItems.querySelector("input[name='ids-restore']");
             inputsdChecked.forEach(input => {
                 const id = input.value;
-                ids.push(id);   
+                ids.push(id);
             });
             formRestoreItems.submit();
         } else {
