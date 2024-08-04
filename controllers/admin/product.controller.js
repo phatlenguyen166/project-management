@@ -102,7 +102,10 @@ module.exports.restoreItem = async (req, res) => {
 module.exports.restoreManyProducts = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
+<<<<<<< HEAD
     
+=======
+>>>>>>> 90d239f9ab3e58041ee8f9bfd3d20cb982e2f778
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
