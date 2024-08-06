@@ -80,7 +80,7 @@ module.exports.deleted = async (req, res) => {
 
 
     const products = await Product.find(find)
-        
+
         .limit(objectPagination.limitItem)
         .skip(objectPagination.skip);
 
@@ -135,6 +135,9 @@ module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
 
     await Product.updateOne({ _id: id, }, { status: status })
+    req.flash(
+        "info", "Cập nhật trạng thái thành công!"
+    )
     res.redirect("back");
 }
 
@@ -146,9 +149,15 @@ module.exports.changeMulti = async (req, res) => {
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+            req.flash(
+                "info", `Cập nhật trạng thái ${ids.length} sản phẩm thành công!`
+            )
             break;
         case "inactive":
             await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+            req.flash(
+                "info", `Cập nhật trạng thái ${ids.length} sản phẩm thành công!`
+            )
             break;
         case "delete-all":
             await Product.updateMany(

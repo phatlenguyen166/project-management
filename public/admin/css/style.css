@@ -6,7 +6,7 @@
     z-index: 999;
 }
 
-.header .inner-logo {
+.header .inner-logo a {
     font-size: 24px;
     font-weight: 700;
     color: #fff;
@@ -41,3 +41,40 @@
     padding: 6px 10px;
     border-bottom: 1px solid #515151;
 }
+
+[show-alert], .message.info {
+  position: fixed;
+  top: 63px;
+  right: 7.8px;
+  z-index: 9999;
+}
+
+
+[show-alert].alert-hidden {
+  animation-name: alert-hiddent;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes alert-hiddent {
+  from {
+    right: 7.8px;
+  }
+
+  to {
+    right: -100%;
+    display: none;
+  }
+}
+
+[show-alert] [close-alert] {
+  background-color: #ffffffc4;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 50%;
+  cursor: pointer;
+} 
