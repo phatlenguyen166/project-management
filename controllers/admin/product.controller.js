@@ -178,6 +178,9 @@ module.exports.changeMulti = async (req, res) => {
                 position = parseInt(position);
                 await Product.updateOne({ _id: id }, { position: position });
             }
+            req.flash(
+                "info", `Đã đổi vị trí ${ids.length} thành công!`
+            )
             break;
         default:
             break;
