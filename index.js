@@ -4,6 +4,7 @@ const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+
 const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
 const bodyParser = require('body-parser');
