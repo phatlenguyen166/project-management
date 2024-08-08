@@ -29,8 +29,12 @@ router.patch("/deleted/restore-multi", controller.restoreManyProducts);
 router.get("/create", controller.create);
 
 router.post("/create", upload.single('thumbnail'), validate.createPost, controller.createPost);
-
 // End Create Product
 
+// Edit Product
+router.get("/edit/:id", controller.edit);
+
+router.patch("/edit/:id", upload.single('thumbnail'), validate.createPost, controller.editPatch);
+// End Edit Product
 
 module.exports = router;
