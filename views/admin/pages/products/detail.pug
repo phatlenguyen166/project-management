@@ -1,0 +1,79 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main 
+    +alert-error(2000)
+    +alert-success(2000)
+    
+    h1(class="mb-4") Chi tiết sản phẩm sản phẩm
+    
+    form(
+      action=`${prefixAdmin}/products/edit/${product.id}?_method=PATCH` 
+      id="form-edit-product"
+      method="POST"
+      enctype="multipart/form-data"
+    )
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            .form-control(
+        ) <b>#{product.title}</b>
+        .form-group
+            label(for="desc") Mô tả
+            .form-control(
+        ) <b>#{product.description}</b>
+        div(class="form-group")
+            label(for="price") Giá
+            .form-control
+              <b>#{product.price}$</b>
+        div(class="form-group")
+            label(for="discount") Giảm giá
+            .form-control
+              <b>#{product.discountPercentage}%</b>
+        div(class="form-group")
+            label(for="stock") Giảm giá
+            .form-control
+              <b>#{product.stock}</b>
+        div(
+            class="form-group"
+            upload-image
+            ) 
+            label(for="thumbnail") Hình ảnh
+            input.form-control-file(
+            type="file"
+            id="thumbnail"
+            name="thumbnail"
+            accept="image/"
+            upload-image-input
+        )
+            img(src=product.thumbnail, alt=product.title
+            upload-image-preview
+            class="image-preview"
+            )
+        div(class="form-group")
+            label(for="position") Vị trí
+            .form-control
+              <b>#{product.position}</b>
+        div(class="form-group form-check form-check-inline")
+            input.form-check-input(
+            type="radio"
+            id="statusActive"
+            name="status"
+            value="active"
+            checked = (product.status == "active" ? true : false)
+        )
+            label(for="statusActive" class="form-check-label") Hoạt động
+
+
+        div(class="form-group form-check form-check-inline")
+            input.form-check-input(
+            type="radio"
+            id="statusInActive"
+            name="status"
+            value="inactive"
+            checked= (product.status == "inactive" ? true : false)
+        ) 
+            label(for="statusInActive" class="form-check-label") Dừng hoạt động
+        div 
+          a(
+                  href=`${prefixAdmin}/products/edit/${product.id}`
+                  class="btn btn-warning btn-sm") Chỉnh sửa
+    script(src="/admin/js/product.js")
