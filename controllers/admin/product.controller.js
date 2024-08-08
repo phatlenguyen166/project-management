@@ -202,7 +202,7 @@ module.exports.deleteItem = async (req, res) => {
 }
 
 // [GET] /admin/products/create
-module.exports.create = (req, res) => {
+module.exports.create = async (req, res) => {
     res.render("admin/pages/products/create", {
         pageTitle: "Danh sách sản phẩm",
     });
@@ -264,4 +264,22 @@ module.exports.editPatch = async (req, res) => {
     }
 
     res.redirect(`back`);
+}
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+    try {
+        let find = {
+            _id: req.params.id,
+            deleted: false
+        }
+
+        const product = await Product.findOne(find);
+
+        res.render("admin/pages/products/detail", {
+            pageTitle: "Chi tiết sản phẩm",
+            product: product
+        });
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/products`);
+    }
 }
