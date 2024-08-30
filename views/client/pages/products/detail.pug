@@ -18,6 +18,14 @@ block main
                         src=product.thumbnail
                         style="width:100px;"
                     )
+                //- if (product.status)
+                //-     div(class="mb-4")   
+                //-         span Trạng thái: 
+                //-         if (product.status ==="active")
+                //-             span(class="badge badge-success") Hoạt động
+                //-         else 
+                //-             span(class="badge bagde-danger") Dừng hoạt động
+                        
                 if (product.position)
                     .mb-4 Vị trí: <b>#{product.position}</b>  
                 if (product.description)
